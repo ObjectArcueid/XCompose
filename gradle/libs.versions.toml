@@ -1,32 +1,71 @@
 [versions]
+# AGP官方文档：https://developer.android.com/build/gradle-build-overview?hl=zh-cn
 agp = "8.7.3"
-kotlin = "2.0.0"
-coreKtx = "1.10.1"
-junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
-lifecycleRuntimeKtx = "2.6.1"
-activityCompose = "1.8.0"
-composeBom = "2024.04.01"
+# kotlin版本官方文档：https://kotlinlang.org/docs/releases.html#release-details
+kotlin = "2.0.21"
+# hilt官方文档：https://dagger.dev/hilt/gradle-setup
+hilt = "2.53.1"
+# ksp版本号需要与kotlin版本保持一致：https://github.com/google/ksp/releases
+ksp = "2.0.21-1.0.28"
+# androidx版本官方文档：https://developer.android.com/jetpack/androidx/releases/core?hl=zh-cn
+androidxCore = "1.15.0"
+testJunit = "4.13.2"
+testJunitKtx = "1.2.1"
+testEspressoCore = "3.6.1"
+lifecycleRuntimeKtx = "2.8.7"
+androidxActivity = "1.9.3"
+composeBom = "2024.12.01"
 
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+# androidx相关库
+# 简化 Android Framework API 的 Kotlin 扩展库，例如便捷的 SharedPreferences、Context 操作。
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
+# 提供生命周期感知组件的 Kotlin API，例如 LiveData 和 ViewModel。
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+
+# google官方库
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+
+# 测试相关库
+# 用于 Java 项目的单元测试框架。
+junit = { group = "junit", name = "junit", version.ref = "testJunit" }
+# 为 JUnit 提供的 Android 扩展库，支持测试 Android 组件。
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "testJunitKtx" }
+# 用于 UI 测试的核心库，可以模拟用户交互。
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "testEspressoCore" }
+
+# compose相关库
+# 用于在 Jetpack Compose 中方便地管理 Activity。
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
+# 通过 BOM 管理 Jetpack Compose 相关库的版本，确保它们的兼容性。
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+# Jetpack Compose 的基础 UI 组件库。
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+# 提供 Jetpack Compose 中的图形处理支持。
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+# 为 Compose UI 提供开发工具支持，例如可视化工具。
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+# 用于在设计时预览 Compose 界面。
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+# 提供测试 Compose 的工具支持。
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+# 为 Compose 提供 JUnit4 测试支持。
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+# 提供 Material Design 3 风格的 Compose UI 组件。
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 
 [plugins]
+# Android 应用构建插件，用于管理 APK 构建、签名等流程。
 android-application = { id = "com.android.application", version.ref = "agp" }
+# 用于构建和管理 Android 库模块
+android-library = { id = "com.android.library", version.ref = "agp" }
+# 为 Android 提供 Kotlin 编译支持。
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+# 为 Jetpack Compose 提供 Kotlin 编译支持。
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
 
