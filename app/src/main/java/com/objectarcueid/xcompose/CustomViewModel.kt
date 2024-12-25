@@ -12,8 +12,10 @@ class CustomViewModel @AssistedInject constructor(
     private val meUserService: MeUserService,
     @Assisted private val str: String,
 ) : ViewModel() {
-    fun test() {
-        echoLogD("nickname:${meUserService.nickname};str:$str")
+    fun test(): String {
+        return "nickname:${meUserService.nickname};str:$str".also {
+            echoLogD("nickname:${meUserService.nickname};str:$str")
+        }
     }
 }
 

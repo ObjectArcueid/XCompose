@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
             XComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = customViewModel.test(),
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
 }
 
@@ -20,9 +21,19 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file(properties["RELEASE_STORE_FILE"] as String)
+            storePassword = properties["RELEASE_STORE_PASSWORD"] as String
+            keyAlias = properties["RELEASE_KEY_ALIAS"] as String
+            keyPassword = properties["RELEASE_KEY_PASSWORD"] as String
+//            countryOrLocality = "Beijing"
+        }
+    }
     buildTypes {
-        release {
-            isMinifyEnabled = false
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -51,6 +62,7 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 

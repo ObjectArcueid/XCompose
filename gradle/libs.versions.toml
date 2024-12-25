@@ -3,6 +3,8 @@
 agp = "8.7.3"
 # kotlin版本官方文档：https://kotlinlang.org/docs/releases.html#release-details
 kotlin = "2.0.21"
+# kotlinx-serialization：https://github.com/Kotlin/kotlinx.serialization
+kotlinxSerialization = "1.7.3"
 # hilt官方文档：https://dagger.dev/hilt/gradle-setup
 hilt = "2.53.1"
 # ksp版本号需要与kotlin版本保持一致：https://github.com/google/ksp/releases
@@ -16,6 +18,20 @@ lifecycleRuntimeKtx = "2.8.7"
 androidxActivity = "1.9.3"
 composeBom = "2024.12.01"
 
+[plugins]
+# Android 应用构建插件，用于管理 APK 构建、签名等流程。
+android-application = { id = "com.android.application", version.ref = "agp" }
+# 用于构建和管理 Android 库模块
+android-library = { id = "com.android.library", version.ref = "agp" }
+# 为 Android 提供 Kotlin 编译支持。
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+# 为 Jetpack Compose 提供 Kotlin 编译支持。
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
 [libraries]
 # androidx相关库
 # 简化 Android Framework API 的 Kotlin 扩展库，例如便捷的 SharedPreferences、Context 操作。
@@ -26,6 +42,7 @@ androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecyc
 # google官方库
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
 # 测试相关库
 # 用于 Java 项目的单元测试框架。
@@ -55,17 +72,5 @@ androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-te
 # 提供 Material Design 3 风格的 Compose UI 组件。
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 
-[plugins]
-# Android 应用构建插件，用于管理 APK 构建、签名等流程。
-android-application = { id = "com.android.application", version.ref = "agp" }
-# 用于构建和管理 Android 库模块
-android-library = { id = "com.android.library", version.ref = "agp" }
-# 为 Android 提供 Kotlin 编译支持。
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-# 为 Jetpack Compose 提供 Kotlin 编译支持。
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-
-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 
