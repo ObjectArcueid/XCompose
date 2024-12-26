@@ -22,6 +22,13 @@ android {
     }
 
     signingConfigs {
+        getByName("debug")  {
+            storeFile = file(properties["DEBUG_STORE_FILE"] as String)
+            storePassword = properties["DEBUG_STORE_PASSWORD"] as String
+            keyAlias = properties["DEBUG_KEY_ALIAS"] as String
+            keyPassword = properties["DEBUG_KEY_PASSWORD"] as String
+//            countryOrLocality = "Beijing"
+        }
         create("release") {
             storeFile = file(properties["RELEASE_STORE_FILE"] as String)
             storePassword = properties["RELEASE_STORE_PASSWORD"] as String
@@ -31,6 +38,10 @@ android {
         }
     }
     buildTypes {
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug")
+            isMinifyEnabled = false
+        }
         getByName("release") {
             signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
